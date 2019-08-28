@@ -7,7 +7,7 @@ import os
 
 while True:
     try:
-        goodListName = raw_input("Enter filename of text file with wanted values: ")
+        goodListName = input("Enter filename of text file with wanted values: ")
         goodListName = goodListName + ".txt"
         goodListFile = open(goodListName, "rb").read()
         break
@@ -42,13 +42,19 @@ while True:
     searchPath = "./" + folderToSearchName
     for file in os.listdir(searchPath):
         if file in newVals:
-            os.open(file, 'r')
-            open_file = file.readlines()
+            os.open(file).read()
+            # os.open('write_file', 'a')
+            # write_file.append
+            open_file = file.splitlines()
             for num in lines_to_read:
                 value = file[num]
-                list_of_values.append(value)
-            for val in list_of_values:
-                val_1, val_2 = val.split(':')
+                if value == file[10]:
+                    val_1, val_2 = value.split('  ')
+                else:                                           
+                    val_1, val_2 = value.split(':')
+                list_of_values.append(val_2)
+
+            
                 # Append list_of values to a new text file in the appropriate folder, with a \n for each new file. This almost made my head explode! I would like to finish off this loop when I have more time tomorrow. It's getting late and I'm ready for a stiff drink!
                 shutil.copy2(searchPath + "/" + file, newDir)   # Folder needs to be in V:\\Projects\\"Job Name"\\PFS\\BEND_REPORTS
         else: continue
