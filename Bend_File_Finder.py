@@ -50,15 +50,17 @@ while True:
             if file in newVals:
                 os.open(file, 'r')
                 open_file = file.readlines()
-                for i in lines_to_read:
-                    value = file[i]
+                for num in lines_to_read:
+                    value = file[num]
                     list_of_values.append(value)
+                for val in list_of_values:
+                    val_1, val_2 = val.split(':')
                     # Append list_of values to a new text file in the appropriate folder, with a \n for each new file. This almost made my head explode! I would like to finish off this loop when I have more time tomorrow. It's getting late and I'm ready for a stiff drink!
 
                 
                 shutil.copy2(searchPath + "/" + file, newDir)   # Folder needs to be in V:\\Projects\\"Job Name"\\PFS\\BEND_REPORTS
                 
-               else: continue
+            else: continue
         break
     except:
         print("Directory not found!")
