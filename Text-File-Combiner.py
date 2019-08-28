@@ -5,11 +5,6 @@ import os
 
 # This portion finds the wanted text files and copies them into a new folder that the user designates
 
-
-print("This program will use a list of bends in .txt format and search a folder of bend reports. It will copy files that match the names on the list to a new folder.\nThis program, the list in .txt format, and a folder of .txt files must be in the same folder to run.\n")
-
-# 
-
 while True:
     try:
         goodListName = raw_input("Enter filename of text file with wanted values: ")
@@ -43,27 +38,18 @@ for line in wantedValues:
 while True:
     lines_to_read = [0, 1, 5, 6, 7, 10, 15, 16, 18, 20, 27, 33, 34, 37]
     list_of_values = []
-    try:
-        folderToSearchName = raw_input("Enter the name of the folder to search: ")  #Change to the cwd of the greenle bend reports output folder from Revit
-        searchPath = "./" + folderToSearchName
-        for file in os.listdir(searchPath):
-            if file in newVals:
-                os.open(file, 'r')
-                open_file = file.readlines()
-                for num in lines_to_read:
-                    value = file[num]
-                    list_of_values.append(value)
-                for val in list_of_values:
-                    val_1, val_2 = val.split(':')
-                    # Append list_of values to a new text file in the appropriate folder, with a \n for each new file. This almost made my head explode! I would like to finish off this loop when I have more time tomorrow. It's getting late and I'm ready for a stiff drink!
-
-                
+    folderToSearchName = raw_input("Enter the name of the folder to search: ")  #Change to the cwd of the greenle bend reports output folder from Revit
+    searchPath = "./" + folderToSearchName
+    for file in os.listdir(searchPath):
+        if file in newVals:
+            os.open(file, 'r')
+            open_file = file.readlines()
+            for num in lines_to_read:
+                value = file[num]
+                list_of_values.append(value)
+            for val in list_of_values:
+                val_1, val_2 = val.split(':')
+                # Append list_of values to a new text file in the appropriate folder, with a \n for each new file. This almost made my head explode! I would like to finish off this loop when I have more time tomorrow. It's getting late and I'm ready for a stiff drink!
                 shutil.copy2(searchPath + "/" + file, newDir)   # Folder needs to be in V:\\Projects\\"Job Name"\\PFS\\BEND_REPORTS
-                
-            else: continue
-        break
-    except:
-        print("Directory not found!")
+        else: continue
 raw_input("-------DONE: PRESS ENTER TO EXIT-------")
-
-# TODO: 
