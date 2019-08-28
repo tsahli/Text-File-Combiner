@@ -1,0 +1,34 @@
+Project Number:        2108
+Project Name:          UUSCH
+Assembly Name:         
+
+
+Greenlee Bender:       854DX
+Conduit Type:          EMT
+Conduit Size (INCHES): 1 1/2
+
+
+Pipe Identification       ELEV-6_000E
+Segment Before:           ELEV-6_0010
+Segment After:            ELEV-6_000F
+
+
+# of Seq. Bends:            2
+Bend Mark:                  1 1/4"         11' - 5 1/2"   0"             0"             0"          
+Bend Rotation (DEGREES):    0              -90            0              0              0           
+Bend Angle (DEGREES):       30             45             0              0              0           
+Note: NEGATIVE rotation values represent rotating the conduit CLOCKWISE from the tail end of the conduit.
+Bend rotation values are all relative to the first bend.
+
+
+# of Conc. Bends:           0
+Bend Mark Start:            0"
+Bend Angle per Conc. Bend:  0.000
+Bend Radius for Conc. Bend: 0.000
+
+
+Cut Mark C1:                   6 3/4"
+Cut Mark C2:                   16' - 3 1/4"
+
+
+Error Code:                    129

@@ -1,0 +1,34 @@
+Project Number:        2108
+Project Name:          UUSCH
+Assembly Name:         
+
+
+Greenlee Bender:       881
+Conduit Type:          EMT
+Conduit Size (INCHES): 4
+
+
+Pipe Identification       RDPA.2_0007
+Segment Before:           RDPA.2_0006
+Segment After:            RDPA.2_0008
+
+
+# of Seq. Bends:            0
+Bend Mark:                  0"             0"             0"             0"             0"          
+Bend Rotation (DEGREES):    0              0              0              0              0           
+Bend Angle (DEGREES):       0              0              0              0              0           
+Note: NEGATIVE rotation values represent rotating the conduit CLOCKWISE from the tail end of the conduit.
+Bend rotation values are all relative to the first bend.
+
+
+# of Conc. Bends:           0
+Bend Mark Start:            0"
+Bend Angle per Conc. Bend:  0.000
+Bend Radius for Conc. Bend: 0.000
+
+
+Cut Mark C1:                   0"
+Cut Mark C2:                   10' - 0"
+
+
+Error Code:                    0
