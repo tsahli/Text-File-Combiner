@@ -36,7 +36,7 @@ for line in wantedValues:
     newVals.append(line)
 
 while True:
-    lines_to_read = [0, 1, 5, 6, 7, 10, 15, 16, 18, 20, 27, 33, 34, 37]
+    lines_to_read = [0, 1, 5, 6, 7, 10, 15, 16, 17, 18, 23, 29, 30, 33]
     list_of_values = []
     folderToSearchName = input("Enter the name of the folder to search: ")  #Change to the cwd of the greenle bend reports output folder from Revit
     searchPath = "./" + folderToSearchName
