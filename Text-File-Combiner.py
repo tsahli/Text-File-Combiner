@@ -35,31 +35,28 @@ for line in wantedValues:
     line = line + textExtension
     newVals.append(line)
 
-while True:
-    lines_to_read = [0, 1, 5, 6, 7, 10, 15, 16, 18, 20, 27, 33, 34, 37]
-    list_of_values = []
-    folderToSearchName = input("Enter the name of the folder to search: ")  #Change to the cwd of the greenle bend reports output folder from Revit
-    searchPath = "./" + folderToSearchName
-    for file in os.listdir(searchPath):
-        if file in newVals:
-            open_file = open(cwd + '\\GREENLEE BENDS\\' + file).read()
-            # os.open('write_file', 'a')
-            # write_file.append
-            split_file = open_file.splitlines()
-            for num in lines_to_read:
-                value = split_file[num]
-                if value == split_file[10]:
-                    split_value = value.split('       ')
-                    val_1 = split_value[0]
-                    val_2 = split_value[1].strip()
-                else:                                           
-                     split_value = value.split(':')
-                     val_1 = split_value[0]
-                     val_2 = split_value[1].strip()
+lines_to_read = [0, 1, 5, 6, 7, 10, 15, 16, 17, 18, 23, 29, 30, 33]
+list_of_values = []
+folderToSearchName = input("Enter the name of the folder to search: ")  #Change to the cwd of the greenle bend reports output folder from Revit
+searchPath = "./" + folderToSearchName
+for file in os.listdir(searchPath):
+    if file in newVals:
+        open_file = open(cwd + '\\GREENLEE BENDS\\' + file).read()
+        split_file = open_file.splitlines()
+        for num in lines_to_read:
+            value = split_file[num]
+            if value == split_file[10]:
+                split_value = value.split('       ')
+                val_1 = split_value[0]
+                val_2 = split_value[1].strip()
+            else:                                           
+                split_value = value.split(':')
+                val_1 = split_value[0]
+                val_2 = split_value[1].strip()
                 list_of_values.append(val_2)
 
             
                 # Append list_of values to a new text file in the appropriate folder, with a \n for each new file. This almost made my head explode! I would like to finish off this loop when I have more time tomorrow. It's getting late and I'm ready for a stiff drink!
                 # shutil.copy2(searchPath + "/" + file, newDir)   # Folder needs to be in V:\\Projects\\"Job Name"\\PFS\\BEND_REPORTS
         else: continue
-raw_input("-------DONE: PRESS ENTER TO EXIT-------")
+input("-------DONE: PRESS ENTER TO EXIT-------")
