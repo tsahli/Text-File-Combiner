@@ -1,6 +1,6 @@
 #!python
 
-import shutil, os, sys, csv
+import os, sys, csv
 
 # This portion finds the wanted text files, decodes and cleans them into a new list to be iterated through later on in the program.
 
@@ -57,6 +57,7 @@ csvPath = new_dir_input + '\\Combined_' + good_list_name + '.csv'
 
 with open(csvPath, 'a') as csvFile:
     writer = csv.writer(csvFile)
+    writer.writerow(job_num) # Also print job name here
     writer.writerow(header_list)
 
 for file in os.listdir(search_path):
