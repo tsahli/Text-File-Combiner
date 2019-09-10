@@ -1,12 +1,16 @@
-#!python
+#!python3
+#Text-File-Combiner.py - This program will search through txt files and combine the right information from each one into a csv file for further processing
+#The user name in the search path variable will need to be changed to the correct file path that it is being copied into!
 
-import os, sys, csv
+import os, sys, csv, getpass
 
 # This portion finds the wanted text files, decodes and cleans them into a new list to be iterated through later on in the program.
 
+user = getpass.getuser()
+
 while True:
     try:
-        os.chdir('C:\\Users\\tsahli\\Desktop\\VDC\\Projects\\2108 - UU HOUSING\\3 - PFS\\Greenlee Bend Reports')  # This line to be removed once program is deployed into the appropriate folder
+        os.chdir('V:\\1. VDC Projects\\Greenlee_Bend_Reports\\' + user + '\\Lists_of_wanted_Bends')  # This line to be removed once program is deployed into the appropriate folder
         job_num = str(input('Enter the job number: '))
         good_list_name = input("Enter filename of text file with wanted values: " )
         good_list_name_txt = good_list_name + ".txt"
@@ -18,7 +22,7 @@ while True:
 mytext = goodListFile.decode('utf16')
 wantedValues = mytext.splitlines()
 textExtension = ".txt"
-cwd = os.getcwd()
+cwd = os.getcwd()   #Is this used anywhere?
 
 newVals = []
 
@@ -29,18 +33,24 @@ for line in wantedValues:
 
 # This portion finds the project file path to save the new txt file in the correct project folder later on.
 
+projects_dir_path = ('V:\\1. VDC Projects')
+projects_dir = os.listdir(projects_dir_path)
+good_bends_dir = ('\\3- PFS\\Greenlee_Used_Bend_Reports')
+
 job_found = False
 while not job_found:
     try:        
-        for foldername, subfolders, file_names in os.walk('C:\\Users\\tsahli\\Desktop\\VDC\\Projects\\'):    #This will have to be changed to the appropriate VDC folder        
+        for dir_names in projects_dir:            
             if job_found == True:
                 break           
-            for folder_name in subfolders:
-                if job_num in folder_name:
-                    job_dir_name = ('C:\\Users\\tsahli\\Desktop\\VDC\\Projects\\' + folder_name)
-                    job_found = True    #This staement should break the while loop. Why doesn't it?
-                    break                
-        new_dir_input = (job_dir_name + '\\3 - PFS\\Greenlee Bend Reports\\Areas to bend')              
+            else:
+               if job_num in dir_names:                
+                   job_dir_name = (projects_dir_path + '\\' + dir_names)
+                   job_name = str(job_dir_name.split(' - ')[1])
+                   job_found = True    #This staement should break the while loop. Why doesn't it?
+                   break            
+            
+        new_dir_input = (job_dir_name + good_bends_dir)              
         break
     except:
         print("\nJob not found. Restart and verify job number is typed correctly and also exists in the Projects folder.\n")
@@ -49,16 +59,20 @@ while not job_found:
 
 # This portion opens a new file in the correct project directory and appends the wanted information to a txt file within it.
 
-header_list = ['Conduit Type', 'Conduit Size', 'Pipe ID', '# of Bends','Cut Mark 1', 'Cut Mark 2', 'Bend Mark', 'Bend Rotation', 'Bend Angle','# of Conc. Bends', 'Error Code']
+job_header_list_1 = ['Job Name', 'Job Number']
+job_header_list_2 = [job_name, job_num]
+param_header_list = ['Conduit Type', 'Conduit Size', 'Pipe ID', '# of Bends','Cut Mark 1', 'Cut Mark 2', 'Bend Mark', 'Bend Rotation', 'Bend Angle','# of Conc. Bends', 'Error Code']
 lines_to_read = [6, 7, 10, 15, 29, 30, 16, 17, 18, 23, 33]
-search_path = ('C:\\Users\\tsahli\\Desktop\\VDC\\Projects\\2108 - UU HOUSING\\3 - PFS\\Greenlee Bend Reports\\Exports from Revit') # This will have to be changed to the appropriate VDC folder
+search_path = ('V:\\1. VDC Projects\\Greenlee_Bend_Reports\\' + user + '\\BendWorks_Exports') # The user name will have to be changed to the same name of the folder path VDC folder
 
 csvPath = new_dir_input + '\\Combined_' + good_list_name + '.csv'
 
-with open(csvPath, 'a') as csvFile:
+with open(csvPath, 'a', newline='') as csvFile:
     writer = csv.writer(csvFile)
-    writer.writerow(job_num) # Also print job name here
-    writer.writerow(header_list)
+    writer.writerow(job_header_list_1)
+    writer.writerow(job_header_list_2) 
+    writer.writerow(param_header_list)
+    writer.writerow('')
 
 for file in os.listdir(search_path):
     if file in newVals:     
