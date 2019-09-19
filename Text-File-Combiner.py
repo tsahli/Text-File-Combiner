@@ -74,8 +74,10 @@ with open(csvPath, 'a', newline='') as csvFile:
     writer.writerow(param_header_list)
     writer.writerow('')
 
+list_of_lists = []
+
 for file in os.listdir(search_path):
-    if file in newVals:     
+    if file in newVals:
         open_file = open(search_path + '\\' + file).read()
         split_file = open_file.splitlines()
         list_of_values = []
@@ -87,13 +89,18 @@ for file in os.listdir(search_path):
                     val_1 = split_value[0]
                     val_2 = split_value[1].strip()
                     list_of_values.append(val_2)
-                else:                                           
+                else:
                     split_value = value.split(':')
                     val_1 = split_value[0]
                     val_2 = split_value[1].strip()
                     list_of_values.append(val_2)
-        with open(csvPath, 'a') as csvFile:
-            writer = csv.writer(csvFile)
-            writer.writerow(list_of_values)
+        list_of_lists.append(list_of_values)
+
+list_of_lists.sort()
+
+with open(csvPath, 'a') as csvFile:
+    writer = csv.writer(csvFile)
+    for item in list_of_lists:
+        writer.writerow(item)
 
 input("-------DONE: PRESS ENTER TO EXIT-------")
